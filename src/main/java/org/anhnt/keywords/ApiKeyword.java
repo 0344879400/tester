@@ -116,7 +116,7 @@ public class ApiKeyword {
                         spec(SpecBuilder.getResponseSpecBuilder()).
                         extract().response();
 
-        LogUtils.info("RESPONSE: \n" + response.prettyPrint());
+//        LogUtils.info("RESPONSE: \n" + response.prettyPrint());
         AllureManager.saveTextLog("RESPONSE: \n" + response.prettyPrint());
         return response;
     }

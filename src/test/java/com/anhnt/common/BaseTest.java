@@ -22,18 +22,24 @@ public class BaseTest {
 
     @BeforeSuite
     public void loginUser() {
+
         LoginPOJO loginPOJO = LoginPOJO_Builder.getDataLogin();
 
         Gson gson = new Gson();
 
-        Response response = ApiKeyword.postNotAuth(EndPointGlobal.EP_LOGIN, gson.toJson(loginPOJO));
+//        Response response = ApiKeyword.postNotAuth(EndPointGlobal.EP_LOGIN, gson.toJson(loginPOJO));
+        RequestSpecification request = given();
+        request.baseUri("https://api.anhtester.com/api")
+                .accept("application/json")
+                .contentType("application/json")
+                .body(gson.toJson(loginPOJO));
 
+        Response response = request.when().post("/login");
         response.then().statusCode(200);
 
         TokenGlobal.TOKEN = response.getBody().path("token");
         System.out.println("token"+ TokenGlobal.TOKEN );
         LogUtils.info("Token Global: " + TokenGlobal.TOKEN);
-        System.out.println("test");
         AllureManager.saveTextLog("Token Global: " + TokenGlobal.TOKEN);
     }
 }

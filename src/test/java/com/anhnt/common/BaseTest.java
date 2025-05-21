@@ -17,22 +17,23 @@ import org.testng.annotations.*;
 
 import static io.restassured.RestAssured.given;
 
-@Listeners(TestListener.class)
+//@Listeners(TestListener.class)
 public class BaseTest {
 
-    @BeforeTest
+    @BeforeSuite
     public void loginUser() {
         LoginPOJO loginPOJO = LoginPOJO_Builder.getDataLogin();
 
-//        Gson gson = new Gson();
-//
-//        Response response = ApiKeyword.postNotAuth(EndPointGlobal.EP_LOGIN, gson.toJson(loginPOJO));
-//
-//        response.then().statusCode(200);
-//
-//        TokenGlobal.TOKEN = response.getBody().path("token");
-//        System.out.println("token"+ TokenGlobal.TOKEN );
-//        LogUtils.info("Token Global: " + TokenGlobal.TOKEN);
-//        AllureManager.saveTextLog("Token Global: " + TokenGlobal.TOKEN);
+        Gson gson = new Gson();
+
+        Response response = ApiKeyword.postNotAuth(EndPointGlobal.EP_LOGIN, gson.toJson(loginPOJO));
+
+        response.then().statusCode(200);
+
+        TokenGlobal.TOKEN = response.getBody().path("token");
+        System.out.println("token"+ TokenGlobal.TOKEN );
+        LogUtils.info("Token Global: " + TokenGlobal.TOKEN);
+        System.out.println("test");
+        AllureManager.saveTextLog("Token Global: " + TokenGlobal.TOKEN);
     }
 }
